@@ -15,7 +15,7 @@ const MultipleCounter = () => {
   return (
     <div className={styles.multipleCounter}>
       <CounterGroupGenerator setSize={setSize} size={size} />
-      <CounterGroupSum sum={sum} setSum={setSum} />
+      {size > 0 && <CounterGroupSum sum={sum} setSum={setSum} />}
       <CounterGroup size={size} setSum={setSum} />
     </div>
   )
