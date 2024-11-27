@@ -1,18 +1,11 @@
 import Counter from "./Counter"
-import { useMemo, useState, useEffect } from "react"
 
 const CounterGroup = (props) => {
-  const [size, setSize] = useState(props)
+  const { size, setSum } = props
 
-  useEffect(() => {
-    setSize(props)
-  }, [props])
+  const counters = Array.from({ length: size }).map((_, i) => <Counter key={i} setSum={setSum} size={size} />)
 
-  const generatedCounter = useMemo(() => {
-    return Array.from({ length: size }).map((_, index) => <Counter key={index} />)
-  }, [size])
-
-  return <>{generatedCounter}</>
+  return <div>{counters}</div>
 }
 
 export default CounterGroup

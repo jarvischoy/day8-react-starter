@@ -1,15 +1,25 @@
 import styles from "./CounterGroupGenerator.module.css"
+import React, { useState } from "react"
 
-const CounterGroupGenerator = ({ size, setSize, handleResetCounter }) => {
+const CounterGroupGenerator = (props) => {
+  const [size, setSize] = useState(0)
+
+  const { setSize: setGlobalSize } = props
+
   const handleChange = (event) => {
-    setSize(event.target.value !== "" ? event.target.value : 0)
+    event.target.value = Math.min(Math.max(0, event.target.value), 20)
+    setSize(event.target.value)
+  }
+
+  const handleReset = () => {
+    setGlobalSize(size)
   }
 
   return (
     <div className={styles.generator}>
-      <span>size: </span>
-      <input type="text" onChange={handleChange} value={size} />
-      <button onClick={handleResetCounter}>reset</button>
+      <span>size:</span>
+      <input type="number" value={size} onChange={handleChange}></input>
+      <button onClick={handleReset}>reset</button>
     </div>
   )
 }

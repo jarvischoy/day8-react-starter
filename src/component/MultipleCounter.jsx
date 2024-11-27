@@ -1,18 +1,22 @@
 import CounterGroupGenerator from "./CounterGroupGenerator"
-import React, { useMemo, useState } from "react"
+import React, { useEffect, useState } from "react"
 import CounterGroup from "./CounterGroup"
+import CounterGroupSum from "./CounterGroupSum"
 import styles from "./MultipleCounter.module.css"
 
 const MultipleCounter = () => {
   const [size, setSize] = useState(0)
+  const [sum, setSum] = useState(0)
 
-  const handleResetCounter = () => {}
+  useEffect(() => {
+    setSum(0)
+  }, [size])
 
   return (
     <div className={styles.multipleCounter}>
-      <CounterGroupGenerator size={size} setSize={setSize} handleResetCounter={handleResetCounter} />
-      {size > 0 ? "sum" : ""}
-      <CounterGroup size={size} />
+      <CounterGroupGenerator setSize={setSize} size={size} />
+      <CounterGroupSum sum={sum} setSum={setSum} />
+      <CounterGroup size={size} setSum={setSum} />
     </div>
   )
 }
